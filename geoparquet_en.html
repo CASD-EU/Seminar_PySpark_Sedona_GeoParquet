@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>Git at CASD</title>
+
+    <link rel="stylesheet" href="dist/reset.css"/>
+    <link rel="stylesheet" href="dist/reveal.css"/>
+    <link rel="stylesheet" href="dist/theme/dracula.css"/>
+    <style>
+        .left-align {
+            text-align: left;
+        }
+    </style>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css"/>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <!--Slide 0: overview-->
+            <section>
+                <a href="https://casd.eu">
+                    <img src="assets/CASD.png" alt="casd logo" style="
+                  height: 250px;
+                  margin: 0 auto 4rem auto;
+                  background: transparent;
+                  -webkit-filter: invert(1);
+                  filter: invert(1);
+                " class="demo-logo"/>
+                </a>
+                <h3>Git at CASD</h3>
+                <p>
+                    <small>Datascience team</small>
+                </p>
+            </section>
+
+            <section class="left-align">
+                <h3>Goals</h3>
+                <ul>
+                    <li>What is git?</li>
+                    <li>How does git work?</li>
+                    <li>What is GitHub/Gitlab?</li>
+                    <li>Git at CASD</li>
+                </ul>
+            </section>
+        </section>
+
+        <!--Slide 1: What is git?-->
+        <section>
+            <section class="left-align">
+                <h3>What is git?</h3>
+
+                <p><em>Git</em> is a distributed <em>version control system (VCS)</em> created by <em>Linus
+                Torvalds</em> in 2005 to manage the Linux kernel. The main objective of git is: </p>
+
+                <ul>
+                    <li><em>Version control</em>: Every change is recorded with author, date, and message.</li>
+                    <li><em>Backtracking</em>: Recover any version of any file at any time.</li>
+                    <li><em>Collaboration</em>: Creating a "parallel universe" for your code to make changes safely</li>
+                </ul>
+
+                <p></p>
+            </section>
+
+            <section>
+                <h3>Key concepts in git (1)</h3>
+                <ul>
+                    <li><em>Git Repository(repo)</em>: is the project folder where Git tracks all versions of your files</li>
+                    <li><em>Working Directory</em>: The files and folders you're actively editing.</li>
+                    <li><em>Staging Area (Index)</em>: A temporary area to preview and prepare changes before committing.</li>
+                    <li><em>Snapshot</em>: A snapshot records all your files at a given point of time.</li>
+                    <li><em>Commit</em>: The act of taking a snapshot with date, author, and message.</li>
+
+                </ul>
+            </section>
+
+            <section>
+                <h3>Key concepts in git (2)</h3>
+                <ul>
+                    <li><em>Branch</em>: A branch is a collection of linked commits. Each repo must have at least one branch. The main branch is called <em>master</em> branch by default</li>
+                    <li><em>Master Branch</em>: is the production-ready code version of your project </li>
+                    <li><em>HEAD</em>: A pointer to your current branch. It represents where you are in the Git history, and where the next commit will be written</li>
+                    <li><em>Merging Branch</em>: A temporary area to preview and prepare changes before committing.</li>
+                </ul>
+            </section>
+
+
+        </section>
+
+
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    });
+</script>
+</body>
+
+</html>
