@@ -11,3 +11,4 @@ node_modules/
 .sass-cache
 seminare_venv/
 data/fr_immo_transaction.parquet
+sedona_venv/
