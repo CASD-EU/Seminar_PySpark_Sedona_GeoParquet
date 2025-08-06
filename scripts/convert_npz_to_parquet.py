@@ -36,8 +36,13 @@ def convert_npz_to_parquet(npz_file_path:str, col_list:List[str], parquet_file_o
         print(f"result data frame colum list: {data.keys()}")
         # convert to pandas dataframe
         resu_pdf = pd.DataFrame.from_dict(data)
+        # Normalize datetime columns to date, by default, pandas use nanoseconds to express datetime, but spark use
+        # millisecond, read a parquet file with nanoseconds will crash spark.
+        resu_pdf["date_transaction"] = resu_pdf["date_transaction"].dt.date
+
         # write as a parquet file
         resu_pdf.to_parquet(parquet_file_out_path, engine="pyarrow")
+        print(f"✅ Parquet file written: {parquet_file_out_path}")
 
 
 def main():
