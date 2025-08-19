@@ -12,3 +12,4 @@ node_modules/
 seminare_venv/
 data/fr_immo_transaction.parquet
 sedona_venv/
+data/tmp
