@@ -60,13 +60,13 @@ https://sedona.apache.org/latest/
 
 ## 3. Working with GeoParquet
 
-### 3.1 Introduction to GeoParquet
+### 3.1 Introduction to parquet
+
+### 3.2 Introduction to GeoParquet
 - What is GeoParquet?
 - Advantages over `Shapefile, GeoJSON, CSV+WKT`
 - GeoParquet spec overview: geometry_columns, crs, encoding, bbox, orientation
 - Reading and Inspecting GeoParquet
 - Writing Spatial Data with geoparquet with CRS awareness
 
-### 3.2 Convert GeoTIFF to GeoParquet
 
-- 
