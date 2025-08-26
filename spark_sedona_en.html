@@ -148,18 +148,14 @@
                         A <span style="font-weight: bold;">distributed fault tolerance</span> collection of immutable
                         objects.
                     </li>
-
                     <li class="fragment"><em>DataFrame</em>: An overlay of RDD, provides sql like operations and
                         optimization(Catalyst, Tungsten)
                     </li>
-
                     <li class="fragment"><em>Dataset</em>: Type-safe version of DataFrame, only available for Scala/Java
                         API.
                     </li>
-
                     <li class="fragment"><em>Partitioning</em>: Data(RDD, DataFrame, Dataset) is split into partitions
                         distributed across executors.
-                        API.
                     </li>
 
                 </ul>
@@ -170,22 +166,17 @@
                 <p>Kep concepts in spark(3):</p>
 
                 <ul>
-
                     <li class="fragment"><em>Driver program</em>: Directed acyclic graph (DAG) of transformations and
                         actions.
                     </li>
-
                     <li class="fragment"><em>Transformations</em>: map, filter, groupBy, etc.
                     </li>
-
                     <li class="fragment"><em>Actions</em>: trigger the execution of the transformations before.
                     </li>
-
                     <li class="fragment"><em>Lazy Evaluation</em>: Transformations are not executed immediately.
                         Execution happens only when an action is called.
                         Allows Spark to optimize the DAG as much as possible.
                     </li>
-
                 </ul>
             </section>
 
@@ -221,6 +212,10 @@
             <section>
                 <h3>Install spark in CASD</h3>
 
+                # create a python virtual environment
+                conda create --name spark-sedona python --offline
+
+                # activate
 
             </section>
         </section>
@@ -228,14 +223,31 @@
 
         <!--Slide 5: Sedona introduction-->
         <section>
-            <h2>Apache Sedona</h2>
-            <p><em>Apache Sedona</em> is a cluster computing system for processing large-scale spatial data.
-                Sedona extends existing cluster computing systems, such as <span style="font-weight: bold;">Apache Spark, Apache Flink, and Snowflake</span>,
-                with a set of out-of-the-box <span style="font-weight: bold;">distributed Spatial Datasets and Spatial SQL</span> that efficiently
-                load, process, and analyze large-scale spatial data across machines.</p>
+            <section>
+                <h2>Why use Apache Sedona?</h2>
+                <p><em>Apache Sedona</em> is a cluster computing system for processing large-scale spatial data.
+                    Sedona extends existing cluster computing systems, such as <span style="font-weight: bold;">Apache Spark, Apache Flink, and Snowflake</span>,
+                    with a set of out-of-the-box <span style="font-weight: bold;">distributed Spatial Datasets and Spatial SQL</span>
+                    that efficiently
+                    load, process, and analyze large-scale spatial data across machines.</p>
 
-            <p>CASD provides <em>Apache Spark</em> cluster for Sedona.</p>
+                <p>CASD provides <em>Apache Spark</em> cluster for Sedona.</p>
+            </section>
 
+            <section data-align="left">
+                <h4>Spark Key Advantages:</h4>
+
+                <ul>
+                    <li class="fragment"><em>Speed</em>: 100 times faster than Hadoop MapReduce</li>
+                    <li class="fragment"><em>Versatility</em>: Batch data processing, Machine learning, Graph analytics
+                    </li>
+                    <li class="fragment"><em>Scalability</em>: Single machine, on-premise clusters, public cloud</li>
+                    <li class="fragment"><em>Interoperability</em>: Python, Java, Scala, R and SQL</li>
+                    <li class="fragment"><em>Vast and mature ecosystem</em></li>
+                </ul>
+
+
+            </section>
 
         </section>
 
