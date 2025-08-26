@@ -40,9 +40,9 @@
                 <h3>Goals</h3>
                 <ul>
                     <li>What is apache spark?</li>
-                    <li>Data processing with spark</li>
+                    <li>Data processing with spark.</li>
                     <li>What is apache sedona?</li>
-                    <li>Spatial data processing with sedona</li>
+                    <li>Spatial data processing with sedona.</li>
                 </ul>
             </section>
         </section>
@@ -53,10 +53,18 @@
                 <h3>Why use Apache Spark?</h3>
 
                 <p>
-                    <em>Apache Spark</em> is a <span style="font-weight: bold;">distributed computing framework</span> designed for processing and
+                    <em>Apache Spark</em> is a <span style="font-weight: bold;">distributed computing framework</span>
+                    designed for processing and
                     analyzing large-scale data efficiently. Spark is an <span style="font-weight: bold;">open-source project under the Apache Software
-                    Foundation</span>. Spark is now one of the most widely used big data processing engines.
+                    Foundation</span>.
                 </p>
+
+                <p>
+                    <em>Apache Spark</em> is designed to replace the older distributed computing framework <span
+                        style="font-weight: bold;">Hadoop</span>.
+                    By default, spark performs data computation in memory ont on disk.
+                </p>
+                <small>Spark is now one of the most widely used big data processing engines.</small>
 
 
             </section>
@@ -64,73 +72,29 @@
                 <h4>Spark Key Advantages:</h4>
 
                 <ul>
-                    <li class="fragment">Simple and readable syntax</li>
-                    <li class="fragment">Cross-Platform and Versatile</li>
-                    <li class="fragment">Interoperability with other languages</li>
-                    <li class="fragment">Vast and mature ecosystem</li>
-                    <li class="fragment">Supports Multiple Paradigms(e.g. procedural, object-oriented, functional)</li>
+                    <li class="fragment"><em>Speed</em>: 100 times faster than Hadoop MapReduce</li>
+                    <li class="fragment"><em>Versatility</em>: Batch data processing, Machine learning, Graph analytics</li>
+                    <li class="fragment"><em>Scalability</em>: Single machine, on-premise clusters, public cloud</li>
+                    <li class="fragment"><em>Interoperability</em>: Python, Java, Scala, R and SQL</li>
+                    <li class="fragment"><em>Vast and mature ecosystem</em></li>
                 </ul>
 
                 <aside class="notes">
-                    Python code is close to natural English
-                    Runs on Linux, Windows, macOS without code changes.
-                    Easily integrates with:
-                    - C/C++ via ctypes, cython, pybind11
-                    - Java via Jython
-                    - .NET via pythonnet
-                    500k of libraries via PyPI and Conda:
-                    - Data science: pandas, numpy, matplotlib, scikit-learn
-                    - Web dev: Django, Flask, FastAPI
-                    - Automation: requests, selenium, pyautogui
-                    - AI/ML: tensorflow, torch, transformers
+
                 </aside>
             </section>
             <section id="disadvantages">
                 <h3>Some disadvantages</h3>
                 <ul>
-                    <li class="fragment"><em>Interpreted Language</em>: slower than complied languages(e.g. C, Go)</li>
-                    <li class="fragment"><em>Dynamically Typed</em>: Python interpreter infers variable types
-                        automatically <a href="#/var-type" class="button">⏩ Code example</a></li>
-                    <li class="fragment"><em>Not strongly Typed</em>: unlike Java <a href="#/weak-type" class="button">⏩
-                        Code example</a></li>
-                    <li class="fragment"><em>Global Interpreter Lock (GIL)</em>: Threads cannot run in parallel on
-                        multiple cores
-                    </li>
+                    <li class="fragment"><em>Requires significant hardware resources</em>: CPU, RAM and network(for cluster mode).</li>
+                    <li class="fragment"><em>Complex configuration</em>: Require expertise to set up spark cluster correctly.</li>
+                    <li class="fragment"><em>Deep learning curve</em>: RDDs, DataFrames, DAG scheduling, partitioning.</li>
+                    <li class="fragment"><em>Overhead for Small Jobs</em>: Spark session setup and task scheduling introduce overhead.</li>
 
                 </ul>
             </section>
 
-            <!-- var type code example-->
-            <section id="var-type">
-                <h3>Variables are dynamically typed in python</h3>
-
-                <pre><code class="language-python" data-trim data-line-numbers="|1|4|">
-                    x = 5
-                    print(f"type of x is: {type(x)}")
-                    # type of x is int
-                    x = "hello"
-                    print(f"type of x is: {type(x)}")
-                    # type of x is str
-                </code></pre>
-                <a href="#/disadvantages" class="button">⏩ Go back</a>
-            </section>
-
-            <!-- weak type code example-->
-            <section id="weak-type">
-                <h3>Python is not strongly typed</h3>
-
-                <pre><code class="language-python" data-trim data-line-numbers="|2|4|5|">
-                    # python function checks operator types
-                    1 + "2"      # ❌ TypeError: unsupported operand types (int + str)
-                    # but some type is allowed
-                    1 + True     # ✅ 2        (True → 1)
-                    3 * "a"      # ✅ "aaa"
-
-                </code></pre>
-                <a href="#/disadvantages" class="button">⏩ Go back</a>
-            </section>
         </section>
-
 
         <!--Slide 3: Key concepts in python-->
         <section data-transition="fade-in slide-out">
@@ -388,9 +352,11 @@ my_project/
 
             <section>
                 <h3>3rd party packages :</h3>
-                <small><p>Users need to activate the <em>CASD PyPi server</em>, before running the below command </p></small>
+                <small><p>Users need to activate the <em>CASD PyPi server</em>, before running the below command </p>
+                </small>
                 <pre><code>pip install pandas</code></pre>
-                <small><p><em>CASD PyPi server</em> does not have all the packages in the official PyPi repo. You can check
+                <small><p><em>CASD PyPi server</em> does not have all the packages in the official PyPi repo. You can
+                    check
                     package availabilities
                     with the below commands :</p></small>
                 <pre><code class="language-Bash">pip install package-name --dry-run</code></pre>
@@ -419,37 +385,67 @@ my_project/
         </section>
         <!--Slide 6: Basic python syntax -->
         <section>
-                 <section>
+            <section>
                 <h3>Basic python syntax</h3>
                 <ul>
-                    <li class="fragment">Indentation (Important!) </li>
-                    <li class="fragment">Variables and Data Types </li>
-                    <li class="fragment">Conditions </li>
-                    <li class="fragment">Loops </li>
-                    <li class="fragment">Functions </li>
-                    <li class="fragment">Common data structure </li>
-                    <li class="fragment">Exception handling </li>
-                    <li class="fragment">Imports </li>
+                    <li class="fragment">Indentation (Important!)</li>
+                    <li class="fragment">Variables and Data Types</li>
+                    <li class="fragment">Conditions</li>
+                    <li class="fragment">Loops</li>
+                    <li class="fragment">Functions</li>
+                    <li class="fragment">Common data structure</li>
+                    <li class="fragment">Exception handling</li>
+                    <li class="fragment">Imports</li>
 
                 </ul>
 
-                <p class="fragment">Go to the TP2: <a href="https://github.com/CASD-EU/Seminar_Python_Git/blob/main/notebooks/02.basic_python_syntax.ipynb">basic_python_syntax</a></p>
+                <p class="fragment">Go to the TP2: <a
+                        href="https://github.com/CASD-EU/Seminar_Python_Git/blob/main/notebooks/02.basic_python_syntax.ipynb">basic_python_syntax</a>
+                </p>
             </section>
         </section>
 
         <!--Slide 7: Python for data science -->
         <section>
-                 <section>
+            <section>
                 <h4>Python for data science</h4>
-                     <p>Python provides thousands of packages for data science. Below are some most popular packages</p>
+                <p>Python provides thousands of packages for data science. Below are some most popular packages</p>
                 <ul>
-                   <small> <li class="fragment"><em>Data Wrangling</em>:  <span style="color:#b2dba1;">pyspark, pandas</span>, pyarrow, dask, polars </li></small>
-                   <small> <li class="fragment"><em>Geospatial Data Science </em>: <span style="color:#b2dba1;">sedona, geopandas, shapely, pyproj, rasterio</span>, kepler.gl</li></small>
-                   <small> <li class="fragment"><em>Statistics and Math</em>: <span style="color:#b2dba1;">ydata-profiling, statsmodels, sympy, numpy</span>, scikit-misc</li></small>
-                   <small> <li class="fragment"><em>Machine Learning</em>: <span style="color:#b2dba1;">scikit-learn, xgboost</span>, lightgbm, catboost </li></small>
-                   <small> <li class="fragment"><em>Deep Learning</em>: <span style="color:#b2dba1;">tensorflow, torch, keras</span>, fastai</li></small>
-                   <small> <li class="fragment"><em>Time Series & Forecasting</em>: <span style="color:#b2dba1;">prophet, tsfresh, darts</span>, sktime </li></small>
-                   <small> <li class="fragment"><em>Natural Language Processing (NLP) </em>: <span style="color:#b2dba1;">nltk, spacy, transformers</span>, gensim, textblob, </li></small>
+                    <small>
+                        <li class="fragment"><em>Data Wrangling</em>: <span
+                                style="color:#b2dba1;">pyspark, pandas</span>, pyarrow, dask, polars
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Geospatial Data Science </em>: <span style="color:#b2dba1;">sedona, geopandas, shapely, pyproj, rasterio</span>,
+                            kepler.gl
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Statistics and Math</em>: <span style="color:#b2dba1;">ydata-profiling, statsmodels, sympy, numpy</span>,
+                            scikit-misc
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Machine Learning</em>: <span style="color:#b2dba1;">scikit-learn, xgboost</span>,
+                            lightgbm, catboost
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Deep Learning</em>: <span style="color:#b2dba1;">tensorflow, torch, keras</span>,
+                            fastai
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Time Series & Forecasting</em>: <span style="color:#b2dba1;">prophet, tsfresh, darts</span>,
+                            sktime
+                        </li>
+                    </small>
+                    <small>
+                        <li class="fragment"><em>Natural Language Processing (NLP) </em>: <span style="color:#b2dba1;">nltk, spacy, transformers</span>,
+                            gensim, textblob,
+                        </li>
+                    </small>
 
                 </ul>
 
