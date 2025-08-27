@@ -43,39 +43,36 @@
             <section class="left-align">
                 <h3>Goals</h3>
                 <ul>
-                    <li>What is git?</li>
-                    <li>How does git work?</li>
-                    <li>What is GitHub/Gitlab?</li>
-                    <li>Git at CASD</li>
+                    <li>What is Parquet?</li>
+                    <li>How to read/write Parquet file?</li>
+                    <li>What is GeoParquet?</li>
+                    <li>How to read/write GeoParquet?</li>
                 </ul>
             </section>
         </section>
 
-        <!--Slide 1: What is git?-->
+        <!--Slide 1: What is parquet?-->
         <section>
-            <section class="left-align">
-                <h3>What is git?</h3>
+            <section>
+                <h3>What is Parquet?</h3>
 
-                <p><em>Git</em> is a distributed <em>version control system (VCS)</em> created by <em>Linus
-                Torvalds</em> in 2005 to manage the Linux kernel. The main objective of git is: </p>
-
-                <ul>
-                    <li><em>Version control</em>: Every change is recorded with author, date, and message.</li>
-                    <li><em>Backtracking</em>: Recover any version of any file at any time.</li>
-                    <li><em>Collaboration</em>: Creating a "parallel universe" for your code to make changes safely</li>
-                </ul>
-
-                <p></p>
+                <p><em>Apache Parquet</em> is a columnar storage file format widely used in big data analytics (Spark,
+                    Hive, Dask, DuckDB). It's launched by Cloudera and Twitter 2012, top level apache project since
+                    2015.
+                </p>
+                <img src="assets/column_vs_row.png" alt="column_vs_row.png"/>
             </section>
 
             <section>
-                <h3>Key concepts in git (1)</h3>
+                <h3>Why use Parquet?</h3>
                 <ul>
-                    <li><em>Git Repository(repo)</em>: is the project folder where Git tracks all versions of your files</li>
-                    <li><em>Working Directory</em>: The files and folders you're actively editing.</li>
-                    <li><em>Staging Area (Index)</em>: A temporary area to preview and prepare changes before committing.</li>
-                    <li><em>Snapshot</em>: A snapshot records all your files at a given point of time.</li>
-                    <li><em>Commit</em>: The act of taking a snapshot with date, author, and message.</li>
+                    <li><em>Storage space efficiency</em>: 5-10 times less storage space compare to CSV.
+                    </li>
+                    <li><em>Analytical query efficiency</em>: Projection push-down, predicate push-down</li>
+                    <li><em>Schema evolution</em>: A temporary area to preview and prepare changes before
+                        committing.
+                    </li>
+                    <li><em>Vast framework support</em>: Spark, Pandas, Dask, DuckDB, etc.</li>
 
                 </ul>
             </section>
@@ -83,9 +80,13 @@
             <section>
                 <h3>Key concepts in git (2)</h3>
                 <ul>
-                    <li><em>Branch</em>: A branch is a collection of linked commits. Each repo must have at least one branch. The main branch is called <em>master</em> branch by default</li>
-                    <li><em>Master Branch</em>: is the production-ready code version of your project </li>
-                    <li><em>HEAD</em>: A pointer to your current branch. It represents where you are in the Git history, and where the next commit will be written</li>
+                    <li><em>Branch</em>: A branch is a collection of linked commits. Each repo must have at least one
+                        branch. The main branch is called <em>master</em> branch by default
+                    </li>
+                    <li><em>Master Branch</em>: is the production-ready code version of your project</li>
+                    <li><em>HEAD</em>: A pointer to your current branch. It represents where you are in the Git history,
+                        and where the next commit will be written
+                    </li>
                     <li><em>Merging Branch</em>: A temporary area to preview and prepare changes before committing.</li>
                 </ul>
             </section>
