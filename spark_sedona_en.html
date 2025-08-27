@@ -62,14 +62,14 @@
                 <p>
                     <em>Apache Spark</em> is designed to replace the older distributed computing framework <span
                         style="font-weight: bold;">Hadoop</span>.
-                    By default, spark performs data computation in memory ont on disk.
+                    By default, spark performs data computation in memory, not on disk.
                 </p>
                 <small>Spark is now one of the most widely used big data processing engines.</small>
 
 
             </section>
             <section>
-                <h4>Spark Key Advantages:</h4>
+                <h3>Spark Key Advantages:</h3>
 
                 <ul>
                     <li class="fragment"><em>Speed</em>: 100 times faster than Hadoop MapReduce</li>
@@ -116,7 +116,7 @@
             </section>
             <!--Slide 3-2: key concept in spark 1-->
             <section>
-                <p>Kep concepts in spark(1):</p>
+                <h3>Kep concepts in spark(1):</h3>
 
                 <ul>
 
@@ -140,7 +140,7 @@
             </section>
             <!--Slide 3-3: key concept in spark 2-->
             <section>
-                <p>Kep concepts in spark(2):</p>
+                <h3>Kep concepts in spark(2):</h3>
 
                 <ul>
 
@@ -163,7 +163,7 @@
 
             <!--Slide 3-4: key concept in spark 3-->
             <section>
-                <p>Kep concepts in spark(3):</p>
+                <h3>Kep concepts in spark(3):</h3>
 
                 <ul>
                     <li class="fragment"><em>Driver program</em>: Directed acyclic graph (DAG) of transformations and
@@ -180,9 +180,9 @@
                 </ul>
             </section>
 
-            <!--Slide 3-4: key concept in spark 3-->
+            <!--Slide 3-5: key concept in spark(advance)-->
             <section>
-                <p>Kep concepts in spark(advance):</p>
+                <h3>Kep concepts in spark(advance):</h3>
 
                 <small><p><em>Data shuffling</em> is the redistribution of data across executors. It's one of the most
                     expensive operations, <em>minimizing shuffle is the key for performance.</em>
@@ -197,7 +197,7 @@
         <section data-transition="fade-in slide-out">
             <!-- Slide 4-1: overview      -->
             <section>
-                <p>Spark in CASD</p>
+                <h2>Spark in CASD</h2>
 
                 <ul>
                     <li class="fragment"><em>Spark cluster mode</em>: local, and yarn with hdfs</li>
@@ -208,14 +208,57 @@
                     <li class="fragment"><em>Project Structure & Configuration Files</em>: CASD best practices</li>
                 </ul>
             </section>
-
+            <!-- Slide 4-2: Install spark in casd      -->
             <section>
                 <h3>Install spark in CASD</h3>
+                <pre data-id="code-animation"><code class="language-Bash" data-trim
+                                                    data-line-numbers="|3-9|27-32|38-41|"><script
+                        type="text/template">
+# step1: Install the latest spark framework
+# goto the target folder
+cd C:\Users\Public\Desktop\Raccourcis\Spark
 
-                # create a python virtual environment
-                conda create --name spark-sedona python --offline
+# run the installation script
+.\InstallSpark.ps1
 
-                # activate
+# check the installed spark version
+spark-shell --version
+
+## it may take a few seconds to show the output, be patient
+# expected output
+Welcome to
+____              __
+/ __/__  ___ _____/ /__
+_\ \/ _ \/ _ `/ __/  '_/
+/___/ .__/\_,_/_/ /_/\_\   version 3.5.5
+/_/
+
+Using Scala version 2.12.18, OpenJDK 64-Bit Server VM, 11.0.2
+Branch HEAD
+Compiled by user ubuntu on 2024-08-06T11:36:15Z
+Revision bb7846dd487f259994fdc69e18e03382e3f64f42
+Url https://github.com/apache/spark
+Type --help for more information.
+
+# step2: Install the pyspark support
+# create a python virtual environment
+conda create --name spark-sedona python --offline
+
+# activate the python virtual environment
+conda activate spark-sedona
+
+# check python version
+python -V
+# check installed packages
+pip list
+# install pyspark
+pip install pyspark==3.5.5
+# show the installed package version
+pip show pyspark
+
+
+
+					</script></code></pre>
 
             </section>
         </section>
@@ -225,32 +268,161 @@
         <section>
             <section>
                 <h2>Why use Apache Sedona?</h2>
-                <p><em>Apache Sedona</em> is a cluster computing system for processing large-scale spatial data.
-                    Sedona extends existing cluster computing systems, such as <span style="font-weight: bold;">Apache Spark, Apache Flink, and Snowflake</span>,
-                    with a set of out-of-the-box <span style="font-weight: bold;">distributed Spatial Datasets and Spatial SQL</span>
-                    that efficiently
-                    load, process, and analyze large-scale spatial data across machines.</p>
+                <p><em>Apache Sedona</em> extends existing cluster computing systems, such as <span
+                        style="font-weight: bold;">Apache Spark, Apache Flink, and Snowflake</span> for processing
+                    large-scale spatial data.
 
-                <p>CASD provides <em>Apache Spark</em> cluster for Sedona.</p>
+                    It provides <span style="font-weight: bold;">distributed Spatial Datasets and Spatial SQL query engine</span>
+                    that efficiently load, process, and analyze large-scale spatial data across machines.</p>
+
+                <p>CASD provides <em>Apache Spark cluster for Sedona</em>.</p>
             </section>
-
+           <!--Slide 5-2: Sedona advantages-->
             <section data-align="left">
-                <h4>Spark Key Advantages:</h4>
+                <h3>Sedona Key Advantages:</h3>
 
                 <ul>
-                    <li class="fragment"><em>Speed</em>: 100 times faster than Hadoop MapReduce</li>
-                    <li class="fragment"><em>Versatility</em>: Batch data processing, Machine learning, Graph analytics
+                    <li class="fragment"><em>Speed</em>: 10-100 times faster than GeoPandas</li>
+                    <li class="fragment"><em>Versatility</em>: Read, write and processing vector, raster all in one.
                     </li>
-                    <li class="fragment"><em>Scalability</em>: Single machine, on-premise clusters, public cloud</li>
+                    <li class="fragment"><em>Scalability</em>: Can process terabytes of spatial data distributed across
+                        a cluster.
+                    </li>
                     <li class="fragment"><em>Interoperability</em>: Python, Java, Scala, R and SQL</li>
-                    <li class="fragment"><em>Vast and mature ecosystem</em></li>
+                    <li class="fragment"><em>Rich Spatial Functions</em>: OGC-compliant functions such as ST_Contains,
+                        ST_Distance, ST_Intersects, etc.
+                    </li>
+                    <li class="fragment"><em>Spatial indexing</em>: Built-in R-tree and Quad-tree indexing to speed up
+                        spatial queries
+                    </li>
                 </ul>
 
+            </section>
+                <!--Slide 5-2: Sedona disadvantages-->
+            <section id="sedona-disadvantages">
+                <h3>Some disadvantages of Sedona</h3>
+                <ul>
+                    <li class="fragment"><em>Memory-Intensive</em>: Spatial joins and indexing can cause high memory
+                        usage on large datasets.
+                    </li>
+                    <li class="fragment"><em>Deep Learning Curve</em>: Requires knowledge with both Spark and geospatial
+                        concepts.
+                    </li>
+                    <li class="fragment"><em>Limited Raster Support</em>: Raster support is basic compared to
+                        specialized GIS tools.
+                    </li>
+                    <li class="fragment"><em>Limit cartography Support</em>: Lacks advanced cartography and
+                        visualization features
+                    </li>
 
+                </ul>
             </section>
 
         </section>
 
+        <!--Slide 6: Key concepts in sedona-->
+        <section data-transition="fade-in slide-out">
+            <!--Slide 6-1: sedona general architecture-->
+            <section>
+                <h3>Key Concepts in sedona</h3>
+                <img src="assets/apache-sedona_ecosys.webp" alt="apache-sedona_ecosys.webp"/>
+            </section>
+            <!--Slide 6-2: key concept in sedona-->
+            <section>
+                <h3>Kep concepts in sedona(spark):</h3>
+
+                <ul>
+                    <li class="fragment"><em>Spatial RDDs </em>: Core data model in sedona(spark) for storing spatial
+                        data
+                    </li>
+                    <li class="fragment"><em>Spatial DataFrame</em>: An abstraction of Spatial RDDs to simplify usage
+                    </li>
+                    <li class="fragment"><em>Spatial Functions</em>: Predefined spatial functions
+                    </li>
+                    <li class="fragment"><em>Spatial Partitioning</em>: Distributes data across nodes using spatial
+                        boundaries to optimize joins.
+                    </li>
+                    <li class="fragment"><em>Spatial Indexing</em>: Indexes geometries (R-tree, Quad-tree) columns to
+                        accelerate queries calculation.
+                    </li>
+                </ul>
+            </section>
+             <!--Slide 6-3: spatial rdd in sedona-->
+            <section>
+                <h3>Spatial RDDs in Sedona(Spark):</h3>
+                <p>Sedona adds <em>spatial metadata, spatial indexing</em> on top of Spark’s standard RDD to build a
+                    Spatial RDD.</p>
+                <ul>
+                    <li class="fragment"><em>PointRDD </em>: Core data model to represent points
+                    </li>
+                    <li class="fragment"><em>LineStringRDD</em>: Core data model to represent lines
+                    </li>
+                    <li class="fragment"><em>PolygonRDD</em>: Core data model to represent polygons
+                    </li>
+                    <li class="fragment"><em>RectangleRDD</em>: Core data model to represent bounding boxes
+                    </li>
+                    <li class="fragment"><em>RasterRDD</em>: Core data model to represent raster object
+                    </li>
+                </ul>
+            </section>
+             <!--Slide 6-3: spatial dataframe in sedona-->
+            <section>
+                <h3>Spatial Dataframe in Sedona(Spark):</h3>
+                <p>Sedona adds <em>geometry, raster</em> user define column type on top of Spark’s dataframe to build a
+                    Spatial Dataframe. For all spatial columns, it adds spatial SQL function supports(e.g. ST_Contains,
+                    ST_Transform, etc.)</p>
+                <ul>
+                    <li class="fragment"><em>geometry</em>: stores point, line, polygon, list of polygons
+                    </li>
+                    <li class="fragment"><em>raster</em>: stores pixel grids, CRS, etc.
+                    </li>
+                    <li class="fragment"><em>geometry sql operators</em>: Thirty plus pre-defined functions for geometry columns
+                    </li>
+                    <li class="fragment"><em>raster sql operators</em>: Twenty plus pre-defined functions for geometry columns
+                </ul>
+            </section>
+        </section>
+
+        <!--Slide 7: sedona in CASD-->
+        <section data-transition="fade-in slide-out">
+            <!-- Slide 7-1: overview      -->
+            <section>
+                <h2>Sedona in CASD</h2>
+
+                <ul>
+                    <li class="fragment"><em>Computing engine</em>: spark</li>
+                    <li class="fragment"><em>Spark client API</em>: Python, Java, Scala, SQL, R</li>
+                    <li class="fragment"><em>Integrated Development Environment (IDE)</em>: vs-code, r-studio, jupyter
+                        notebook
+                    </li>
+                    <li class="fragment"><em>Project Structure & Configuration Files</em>: CASD best practices</li>
+                </ul>
+            </section>
+            <!-- Slide 7-2: Install sedona in casd      -->
+            <section>
+                <h3>Install sedona in CASD</h3>
+                <pre data-id="code-animation"><code class="language-Bash" data-trim
+                                                    data-line-numbers="|11-14|"><script
+                        type="text/template">
+# step1: Install the latest sedona framework
+# CASD provides multiple versions of sedona. But by default, CASD only offers the jar files of the
+# `latest version of sedona`. If you want to use a specific version of sedona, you need to contact `service@casd.eu`
+cd C:\Users\Public\Documents\sedona\sedona-35-212-172
+
+# create a folder called jars in your project, and copy the folder `sedona-35-212-172` into jars
+cp -r .\sedona-35-212-172 path\to\your-project\jars
+
+
+# step2: Install the apache-sedona python support
+# install sedona with spark extension
+pip install apache-sedona[spark]
+# show the installed package version
+pip show apache-sedona
+
+					</script></code></pre>
+
+            </section>
+        </section>
 
     </div>
 </div>
