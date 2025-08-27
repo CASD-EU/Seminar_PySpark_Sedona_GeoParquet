@@ -14,6 +14,9 @@ https://sedona.apache.org/latest/
 
 ## 1. Data processing with apache spark
 
+CASD has organized a webinar on apache spark, if you want to learn more about spark, you can check this 
+[page](https://www.casd.eu/webinaire-casd-data-tech/)
+
 ### 1.1. What is Apache Spark?
 
 - Overview and use cases
