@@ -9,7 +9,7 @@ https://sedona.apache.org/latest/
 
 1. Data processing with `apache spark`
 2. Spatial data processing with `apache sedona`
-3. Working with GeoParquet
+3. Working with Parquet and GeoParquet
 
 
 ## 1. Data processing with apache spark
