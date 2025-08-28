@@ -101,6 +101,7 @@
             </section>
         </section>
 
+        <!--Slide 2: Key concepts in parquet-->
         <section>
             <section>
                 <h3>Key concepts in parquet</h3>
@@ -131,14 +132,93 @@
             </section>
             <section>
                 <h3>Parquet file layout example</h3>
-                <ul>
-                    <li><em>Column oriented(e.g. Parquet, ORC)</em>: Write Once Rea Many(WORM) paradigm, less storage
-                        usage, less computing time.
-                    </li>
-                    <li><em>Row oriented(e.g. CSV, SAS7BDAT)</em>: Easy to insert new rows</li>
+                <img src="assets/parquet_file_layout.png" alt="parquet_file_layout.png"/>
+            </section>
 
+            <section>
+                <h3>Projection pushdown</h3>
+                <small><p><em>Projection pushdown</em> is an optimization where the query engine only reads the columns
+                    that
+                    are actually requested, instead of scanning all columns from a Parquet file.
+                </p></small>
+                <img src="assets/projection_pushdown.png" alt="projection_pushdown.png"
+                     style="width:70%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Predicate pushdown</h3>
+                <small><p><em>Predicate pushdown</em> is an optimization where filtering conditions are applied directly
+                    while reading Parquet files, rather than loading
+                    all the data into memory and then filtering.
+                </p></small>
+                <img src="assets/predicate_pushdown.png" alt="predicate_pushdown.png" style="width:70%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Partitioning</h3>
+                <small><p><em>Partitioning</em> is a data organization technique where a large dataset is split
+                    into multiple Parquet files based on the values of one or more columns. Instead of storing all
+                    rows in a single file, rows are grouped into folders (directories) according to partition column
+                    values.
+                </p></small>
+                <img src="assets/parquet_partition_example.png" alt="parquet_partition_example.png"
+                     style="width:60%; height:auto;"/>
+            </section>
+            <section>
+                <h3>Encoding</h3>
+                <small><p><em>Encoding</em> is a technique for representing column values in a more compact way to
+                    reduce storage size and improve scan performance. Parquet supports: Dictionary Encoding, Run-Length
+                    Encoding (RLE), Bit-Packing (BIT_PACKED), Delta Encoding, etc.
+                </p></small>
+                <img src="assets/parquet_encoding_example.png" alt="parquet_encoding_example.png"
+                     style="width:80%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Compression</h3>
+                <small><p><em>Compression</em> in Parquet is applied on data pages (after encoding) to further
+                    reduce storage size and speed up I/O.
+                    Each Parquet column chunk can use a different compression codec, independent of others.
+                </p></small>
+                <ul>
+                    <li><em>Snappy(Spark default)</em>: Fast compression & decompression, moderate compression ratio.
+                    </li>
+                    <li><em>Gzip</em>: Higher compression ratio than Snappy, slower read/write performance
+                    </li>
+                    <li><em>Zstd (Zstandard)</em>: Better compression ratio than Snappy, much faster decompression than Gzip</li>
+                    <li><em>LZ4</em>: Very fast compression, lower compression ratio than Zstd or Gzip
+                    </li>
+                    <li><em>Brotli</em>: Very high compression ratio (better than Gzip in many cases), slower than Snappy/LZ4</li>
                 </ul>
-                <img src="assets/column_vs_row.png" alt="column_vs_row.png"/>
+            </section>
+        </section>
+
+         <!--Slide 3: what is geo parquet-->
+        <section>
+            <section>
+                <h3>What is GeoParquet?</h3>
+GeoParquet is an extension of Parquet for geospatial data.
+It standardizes how geometries (points, lines, polygons, etc.) are stored inside Parquet files, making them interoperable across tools.
+
+Why GeoParquet?
+
+Parquet doesn’t define how to store geometries.
+
+Geospatial data needs geometry encoding + metadata (CRS, bounding box, geometry type).
+
+GeoParquet ensures compatibility between tools like GeoPandas, Apache Sedona, DuckDB, Spark, PostGIS (via export), and cloud warehouses.
+
+Metadata stored:
+
+Geometry column name (e.g., "geometry").
+
+Encoding (usually WKB – Well-Known Binary).
+
+CRS (Coordinate Reference System, like EPSG:4326).
+
+Bounding box of the dataset.
+
+Geometry type(s) (Point, Polygon, etc.).
             </section>
         </section>
 
