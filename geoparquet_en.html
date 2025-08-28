@@ -56,42 +56,90 @@
             <section>
                 <h3>What is Parquet?</h3>
 
-                <p><em>Apache Parquet</em> is a columnar storage file format widely used in big data analytics (Spark,
-                    Hive, Dask, DuckDB). It's launched by Cloudera and Twitter 2012, top level apache project since
-                    2015.
+                <p><em>Apache Parquet</em> is a columnar storage file format widely used in big data analytics (e.g.
+                    Spark,
+                    Flink, Hive, Dask, DuckDB, etc.).
                 </p>
+
+                <p><em>Apache Parquet</em> was launched by Cloudera and Twitter in 2012, top level apache project since
+                    2015. Two major versions(v1 and v2) have been released.
+                </p>
+
+            </section>
+
+            <!--Slide 1-1: Advantages of Parquet-->
+            <section>
+                <h3>Advantages of Parquet</h3>
+                <ul>
+                    <li><em>Storage space efficiency</em>: 5-10 times less storage space compare to CSV, json.
+                    </li>
+                    <li><em>Analytical query efficiency</em>: 5-10 times faster query time compare to CSV, json.
+                    </li>
+                    <li><em>Schema evolution</em>: Supports adding new columns without rewriting the entire dataset.
+                    </li>
+                    <li><em>Vast framework support</em>: Spark, Flink, Pandas, Dask, DuckDB, etc.</li>
+
+                </ul>
+            </section>
+
+            <!--Slide 1-2: disadvantages of Parquet-->
+            <section>
+                <h3>Some disadvantage of Parquet.</h3>
+                <ul>
+                    <li><em>Not ideal for small datasets</em>: metadata and encoding may cost you more than the actual
+                        data
+                    </li>
+                    <li><em>Not human-readable</em>: Parquet is a binary format, requires tool to read and debug</li>
+                    <li><em>Heavy cost on write</em>: Writing parquet file is more CPU-intensive compare to CSV, json
+                        (e.g. sorting, encoding, compression)
+                    </li>
+                    <li><em>Heavy cost on insert</em>: Insert or update a row may require to rewrite the whole parquet
+                        file
+                    </li>
+
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Key concepts in parquet</h3>
+                <ul>
+                    <li><em>Columnar storage</em>: Parquet organizes data column by column instead of row by row.
+                    </li>
+                    <li><em>Projection push-down, predicate push-down</em>: Parquet provides column level index to
+                        reduce
+                        data IO.
+                    </li>
+                    <li><em>Partitions</em>: Parquet splits data into partitions.</li>
+                    <li><em>Integrated schema and metadata</em>: Parquet contains full dataset schema and customizable
+                        metadata
+                    </li>
+                    <li><em>Encoding and compression</em>: Parquet provides column level encoding and compression</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Column storage vs Row storage</h3>
+                <ul>
+                    <li><em>Column oriented(e.g. Parquet, ORC)</em>: Write Once Rea Many(WORM) paradigm, less storage
+                        usage, less computing time.
+                    </li>
+                    <li><em>Row oriented(e.g. CSV, SAS7BDAT)</em>: Easy to insert new rows</li>
+                </ul>
                 <img src="assets/column_vs_row.png" alt="column_vs_row.png"/>
             </section>
-
             <section>
-                <h3>Why use Parquet?</h3>
+                <h3>Parquet file layout example</h3>
                 <ul>
-                    <li><em>Storage space efficiency</em>: 5-10 times less storage space compare to CSV.
+                    <li><em>Column oriented(e.g. Parquet, ORC)</em>: Write Once Rea Many(WORM) paradigm, less storage
+                        usage, less computing time.
                     </li>
-                    <li><em>Analytical query efficiency</em>: Projection push-down, predicate push-down</li>
-                    <li><em>Schema evolution</em>: A temporary area to preview and prepare changes before
-                        committing.
-                    </li>
-                    <li><em>Vast framework support</em>: Spark, Pandas, Dask, DuckDB, etc.</li>
+                    <li><em>Row oriented(e.g. CSV, SAS7BDAT)</em>: Easy to insert new rows</li>
 
                 </ul>
+                <img src="assets/column_vs_row.png" alt="column_vs_row.png"/>
             </section>
-
-            <section>
-                <h3>Key concepts in git (2)</h3>
-                <ul>
-                    <li><em>Branch</em>: A branch is a collection of linked commits. Each repo must have at least one
-                        branch. The main branch is called <em>master</em> branch by default
-                    </li>
-                    <li><em>Master Branch</em>: is the production-ready code version of your project</li>
-                    <li><em>HEAD</em>: A pointer to your current branch. It represents where you are in the Git history,
-                        and where the next commit will be written
-                    </li>
-                    <li><em>Merging Branch</em>: A temporary area to preview and prepare changes before committing.</li>
-                </ul>
-            </section>
-
-
         </section>
 
 
