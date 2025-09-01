@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>Parquet et GeoParquet</title>
+
+    <link rel="stylesheet" href="dist/reset.css"/>
+    <link rel="stylesheet" href="dist/reveal.css"/>
+    <link rel="stylesheet" href="dist/theme/dracula.css"/>
+    <style>
+        .left-align {
+            text-align: left;
+        }
+    </style>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css"/>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <!--Slide 0: overview-->
+            <section>
+                <a href="https://casd.eu">
+                    <img src="assets/CASD.png" alt="casd logo" style="
+                  height: 250px;
+                  margin: 0 auto 4rem auto;
+                  background: transparent;
+                  -webkit-filter: invert(1);
+                  filter: invert(1);
+                " class="demo-logo"/>
+                </a>
+                <h3>Parquet et GeoParquet</h3>
+                <p>
+                    <small>Equipe Datascience</small>
+                </p>
+            </section>
+
+            <section class="left-align">
+                <h3>Objectifs</h3>
+                <ul>
+                    <li>Qu'est-ce que Parquet?</li>
+                    <li>Comment lire/écrire un fichier Parquet ?</li>
+                    <li>Qu'est-ce que GeoParquet ?</li>
+                    <li>Comment lire/écrire un fichier GeoParquet ?</li>
+                </ul>
+            </section>
+        </section>
+
+        <!--Slide 1: What is parquet?-->
+        <section>
+            <section>
+                <h3>Qu'est-ce que Parquet ?</h3>
+
+                <p><em>Apache Parquet</em> est un format de de stockage orienté colonnes largement utilisé dans l'analyse de données
+                    Big Data (par exemple Spark,
+                    Flink, Hive, Dask, DuckDB, etc.).
+                </p>
+
+                <p><em>Apache Parquet</em> a été lancé par Cloudera et Twitter en 2012, il est depuis 2015 un des projets les plus populaires
+                    de la fondation Apache.
+                    Deux versions principales (v1 et v2) ont été publiées à ce jour.
+                </p>
+
+            </section>
+
+            <!--Slide 1-1: Advantages of Parquet-->
+            <section>
+                <h3>Les avantages de Parquet</h3>
+                <ul>
+                    <li><em>Efficacité de l'espace de stockage</em> : 5-10 fois moins volumineux que pour les formats CSV, json.
+                    </li>
+                    <li><em>Efficacité des requêtes (pour l'analytique)</em> : 5-10 fois plus rapides que pour les formats CSV, json.
+                    </li>
+                    <li><em>Modification efficace du schéma de donnnées</em> : Permet l'ajout de nouvelles colonnes sans réécrire tout le dataset.
+                    </li>
+                    <li><em>Pris en charge par les principaux outils</em> : Spark, Flink, Pandas, Dask, DuckDB, etc.</li>
+
+                </ul>
+            </section>
+
+            <!--Slide 1-2: disadvantages of Parquet-->
+            <section>
+                <h3>Quelques désavantages de Parquet.</h3>
+                <ul>
+                    <li><em>Pas idéal pour les petits jeux de données</em> : Les métadonnées et l'encodage risquent de prendre plus de place que 
+                        les données elles-mêmes
+                    </li>
+                    <li><em>Format binaire</em> : Le format de stockage n'est pas directement déchiffrable, il nécessite des outils pour la lecture et le débogage</li>
+                    <li><em>Coût d'écriture élevé</em> : Ecrire un fichier parquet demande davantage de CPU que pour un CSV, json
+                        (notamment : tri, encodage, compression)
+                    </li>
+                    <li><em>Coût d'insertion élevé</em> : Modifier ou insérer une nouvelle ligne peut nécessiter de ré-écrire l'ensemble du jeu de données.
+                    </li>
+
+                </ul>
+            </section>
+        </section>
+
+        <!--Slide 2: Key concepts in parquet-->
+        <section>
+            <section>
+                <h3>Les concepts clefs de Parquet</h3>
+                <ul>
+                    <li><em>Stockage orienté colonnes</em> : Parquet organise les données par colonnnes plutôt que par ligne.
+                    </li>
+                    <li><em>Projection push-down, predicate push-down</em> : Parquet fournit un indexe des au niveau des colonnnes pour réduire les
+                        opérations I/O.
+                    </li>
+                    <li><em>Partitions</em> : Parquet divise les données en partitions pour en optimiser la lecture et les traitements.</li>
+                    <li><em>Schéma et métadonnées intégrées</em> : Un fichier Parquet contient le schéma complet des données et des métadonnées 
+                        personnalisables.
+                    </li>
+                    <li><em>Encodage et compression</em> : Parquet fournit un encodage et une compression au niveau colonnes</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Stockage orienté colonnes vs orienté lignes</h3>
+                <ul>
+                    <li><em>Orienté colonne (Parquet, ORC)</em> : Paradigme "Read Once Rea Many" (WORM) : nécessite moins d'espace de stockage
+                      et de temps de calcul.
+                    </li>
+                    <li><em>Orienté ligne (CSV, SAS7BDAT)</em> : Faible coût pour l'insertion de nouvelles lignes</li>
+                </ul>
+                <img src="assets/column_vs_row.png" alt="column_vs_row.png"/>
+            </section>
+            <section>
+                <h3>Structure de fichier Parquet</h3>
+                <img src="assets/parquet_file_layout.png" alt="parquet_file_layout.png"/>
+            </section>
+
+            <section>
+                <h3>Projection pushdown</h3>
+                <small><p><em>Le "projection pushdown"</em> est une optimisation permettant au moteur de requête de ne lire que les colonnes
+                    qui sont effectivement ciblées par la requête, plutôt que l'ensemble des colonnes du fichier.
+                </p></small>
+                <img src="assets/projection_pushdown.png" alt="projection_pushdown.png"
+                     style="width:70%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Predicate pushdown</h3>
+                <small><p><em>Le "predicate pushdown"</em> est une optimisation consistant à appliquer les filtres sur les données
+                    au moment de la lecture du fichier parquet, évitant de charger l'ensemble des données en mémoire.
+                </p></small>
+                <img src="assets/predicate_pushdown.png" alt="predicate_pushdown.png" style="width:70%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Partitionnement</h3>
+                <small><p><em>Le partitionnement</em> est une technique de structuration des donnnées consistant à diviser un jeu de données
+                    volumineux en plusieurs sous-fichiers parquet en fonction des valeurs prises par une ou plusieurs colonnnes. Ces sous-fichiers 
+                    parquet sont organisés en autant de dossiers que de partitions.
+                </p></small>
+                <img src="assets/parquet_partition_example.png" alt="parquet_partition_example.png"
+                     style="width:60%; height:auto;"/>
+            </section>
+            <section>
+                <h3>Encodage</h3>
+                <small><p><em>L'encodage</em> est une technique qui consiste à représenter les valeurs d'une colonne de manière plus compacte
+                    pour réduire le coût de stockage et pour réduire le coût de lecture. Parquet prend en charge plusieurs méthodes : 
+                    Dictionary Encoding, Run-Length Encoding (RLE), Bit-Packing (BIT_PACKED), Delta Encoding, etc.
+                </p></small>
+                <img src="assets/parquet_encoding_example.png" alt="parquet_encoding_example.png"
+                     style="width:80%; height:auto;"/>
+            </section>
+
+            <section>
+                <h3>Compression</h3>
+                <small><p><em>La compression</em>, en Parquet, est appliquée sur les pages de données (aprèès l'encodage) pour réduire
+                    encore davantage le coût de stockage et accélérer les opérations I/O.
+                    Chaque bloc d'une colonne d'un fichier Parquet peut utiliser une méthode de compression différente, indépendamment 
+                    des autres.
+                </p></small>
+                <ul>
+                    <small>
+                        <li><em>Snappy (par defaut)</em> : Compression rapide, ratio de compression intermédiaire.
+                        </li>
+                    </small>
+                    <small>
+                        <li><em>Gzip</em> : Compression plus lente, ratio de compression plus elevé que Snappy.
+                        </li>
+                    </small>
+                    <small>
+                        <li><em>Zstd (Zstandard)</em> : Compression beaucoup plus rapide que Gzip, ratio de compression 
+                            plus élevé que Snappy.
+                        </li>
+                    </small>
+                    <small>
+                        <li><em>LZ4</em> : Compression très rapide, taux de compression plus faible que Zstd or Gzip.
+                        </li>
+                    </small>
+                    <small>
+                        <li><em>Brotli</em> : Compression plus lente que Snappy/LZ4, taux de compression très élevé (meilleur 
+                            que Gzip dans la plupart des cas).
+                        </li>
+                    </small>
+                </ul>
+            </section>
+        </section>
+
+        <!--Slide 3: what is geo parquet-->
+        <section>
+            <section>
+                <h3>Qu'est-ce que GeoParquet ?</h3>
+                <p>
+                    <em>GeoParquet</em> est une extension de Apache Parquet destinée au stockage <span
+                        style="font-weight: bold;"> de données géospatiales vectorielles
+                (points, lignes, polygones)</span> dans un format orienté colonnes, compressé et incluant de nombreuses métadonnées.</p>
+                <p>
+                    Il est déjà supporté par de nombreux outils (par exemple Sedona, GeoPandas, QGIS, DuckDB, Kepler GL, etc.)
+                    Vous pouvez cconsulter le site officiels de GeoParquet <a href="https://geoparquet.org/"></a> pour plus d'informations.
+                </p>
+            </section>
+
+            <section>
+                <h3>Les avantages de GeoParquet (1)</h3>
+                <ul>
+                    <li class="fragment"><em>Efficacité du stockage</em> : Le stockage orienté colonnes permet un encodage
+                        et une compression plus efficaces.
+                    </li>
+                    <li class="fragment"><em>Efficacité des requêtes analytiques</em> : Implémente le "predicate pushdown"</li>
+                    <li class="fragment"><em>Passage à l'échelle</em> : Le partitionnement facilite les opérations de calcul distribué</li>
+                    <li class="fragment"><em>Inter-opérabilité</em> : Sedona, GeoPandas, QGIS, DuckDB, entrepôts de données cloud
+                        (BigQuery, Snowflake, AWS Athena)
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Les avantages de GeoParquet (2)</h3>
+                <ul>
+                    <li class="fragment"><em>Métadonnées personnalisables</em> : CRS, bounding box, geometry type.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Les désavantages de GeoParquet</h3>
+                <ul>
+                    <li class="fragment"><em>Format binaire</em> : Le format de stockage n'est pas directement déchiffrable, il nécessite des outils pour la lecture et le débogage</li>
+                    <li class="fragment"><em>Pas (encore) aussi populaire que les anciens formats</em> : shapefile, geojson, etc.</li>
+                    <li class="fragment"><em>Ne gère pas le format raster</em> : GeoParquet ne permet pas de traiter des données au format raster nativement
+                    </li>
+                </ul>
+            </section>
+
+        </section>
+
+        <section>
+            <section>
+                <h3>Les concepts clefs en GeoParquet</h3>
+
+                <small><p>GeoParquet enrichit Parquet avec des outils de <em>geo-encodage (WKB)</em> et de <em>geo-métadonnées</em> (CRS, 
+                    type de geometries, bounding box, etc).</p></small>
+                <pre><code class="language-json" data-trim data-line-numbers="|1|2|5-8|10-13|">
+{
+  "version": "1.0.0",
+  "primary_column": "geometry",
+  "columns": {
+    "col1": {
+      "encoding": "WKB",
+      "geometry_types": ["Polygon", "MultiPolygon"],
+      "crs": "EPSG:4326"
+    },
+    "col2": {
+      "encoding": "WKB",
+      "geometry_types": ["Point"],
+      "crs": "EPSG:3857"
+    }
+  }
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Les bounding box (bbox) en GeoParquet</h3>
+
+                <p style="font-size: smaller;">
+                    Les métadonnées des <em>bounding box (bbox)</em> définissent la zone occupée par les formes geométriques
+                    d'un fichier donnné. Sedona peut ainsi <em>ignorer des partitions entières</em>
+                    lors de l'exécution des requêtes.
+                </p>
+
+                 <div style="position: relative; width: 70%; margin: auto;">
+    <!-- Invisible reference image to fix container height -->
+    <img src="assets/geoparquet_bbox1.png"
+         alt=""
+         style="width:100%; visibility:hidden; display:block;">
+
+    <!-- First visible image -->
+    <img class="fragment fade-out"
+         src="assets/geoparquet_bbox1.png"
+         alt="GeoParquet bounding box step 1"
+         style="width:100%; position:absolute; top:0; left:0;">
+
+    <!-- Second image, revealed after first fades -->
+    <img class="fragment fade-in"
+         src="assets/geoparquet_bbox2.png"
+         alt="GeoParquet bounding box step 2"
+         style="width:100%; position:absolute; top:0; left:0;">
+  </div>
+            </section>
+
+        </section>
+
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    });
+</script>
+</body>
+
+</html>
