@@ -39,9 +39,9 @@
             <section data-transition="fade-in slide-out">
                 <h3>Objectifs</h3>
                 <ul>
-                    <li>Qu'est-ce que Apache Spark?</li>
+                    <li>Qu'est-ce que Apache Spark ?</li>
                     <li>Traitement de données avec Spark.</li>
-                    <li>Qu'est-ce que Apache Sedona?</li>
+                    <li>Qu'est-ce que Apache Sedona ?</li>
                     <li>Traitement de données spatiales avec Sedona.</li>
                 </ul>
             </section>
@@ -92,7 +92,7 @@
                     </li>
                     <li class="fragment"><em>Courbe d'apprentissage soutenue</em> : RDDs, DataFrames, plannification par DAG, partitionnement.
                     </li>
-                        <li class="fragment"><em>Inadapté aux petits traitements</em>: Le lancement d'une session Spark session et la plannification des 
+                        <li class="fragment"><em>Inadapté aux petits traitements</em> : Le lancement d'une session Spark session et la plannification des 
                             tâches ralentit Spark au démarrage.
                     </li>
 
@@ -163,7 +163,7 @@
                     </li>
                     <li class="fragment"><em>Transformations</em> : map, filter, groupBy, etc.
                     </li>
-                    <li class="fragment"><em>Actions</em> : Déclenche l'exécution des transformations précédentes.
+                    <li class="fragment"><em>Actions</em> : show, count, etc... Déclenche l'exécution des transformations précédentes.
                     </li>
                     <li class="fragment"><em>Evaluation paresseuse (lazy)</em> : Les transformations ne sont pas appliquées immédiatement.
                         L'exécution est déclenchée au moment où l'action est demandée : Cela permet à Spark d'optimiser au 
@@ -176,8 +176,8 @@
             <section>
                 <h3>Les concepts clefs de Spark (avancé)</h3>
 
-                <small><p><em> Le réarrangement (shuffling) des données</em> est la redistribution des données aux exécuteurs. 
-                    C'est l'une des opérations les plus coûteuses, <em>contrôler le réarrangement est au coeur des enjeux de 
+                <small><p><em> L'échange (shuffling) de données</em> est la redistribution des données entre les exécuteurs. 
+                    C'est l'une des opérations les plus coûteuses, <em>contrôler les flux d'échanges est un enjeu majeur de 
                         performance.</em>
                 </p></small>
                 <img src="assets/spark_shuffle.png" alt="spark_shuffle.png"/>
@@ -193,7 +193,7 @@
                 <h2>Spark au CASD</h2>
 
                 <ul>
-                    <li class="fragment"><em>Mode de cluster Spark</em> : local, et yarn avec hdfs</li>
+                    <li class="fragment"><em>Mode de cluster Spark</em> : local, yarn avec hdfs</li>
                     <li class="fragment"><em>API client Spark</em>: Python, Java, Scala, R, SQL</li>
                     <li class="fragment"><em>Environnement de développement intégré (IDE)</em>: vs-code, r-studio, jupyter
                         notebook
@@ -265,7 +265,7 @@ pip show pyspark
                 <h2>Pourquoi utiliser Sedona ?</h2>
                 <p><em>Apache Sedona</em> étend les fonctionnalités des outils de clustering, comme <span
                         style="font-weight: bold;">Apache Spark, Apache Flink, et Snowflake</span> au
-                        traitement de données spatiales volumineuses .
+                        traitement de données spatiales volumineuses.
 
                     Il fournit <span style="font-weight: bold;"> des Spatial Dataset distribués et un moteur 
                         de requêtes SQL</span> permettant de charger, de traiter et d'analyser efficacement des jeux de 
@@ -300,7 +300,7 @@ pip show pyspark
                     <li class="fragment"><em>Consommation de mémoire intensive</em> : Les jointures et l'indexation spatiales peuvent être très
                         consommatrices de mémoire.
                     </li>
-                    <li class="fragment"><em>Courbe d'apprentissage soutenue</em> : Nécessite des connaissance à la fois de Spark et des 
+                    <li class="fragment"><em>Courbe d'apprentissage soutenue</em> : Nécessite des connaissances à la fois en Spark et en 
                         concepts geospatiaux.
                     </li>
                     <li class="fragment"><em>Fonctionnalités limitées pour les Rasters</em> : Le support pour les rasters est basique comparé aux outils 

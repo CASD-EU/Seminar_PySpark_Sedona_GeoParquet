@@ -108,7 +108,7 @@
                 <ul>
                     <li><em>Stockage orienté colonnes</em> : Parquet organise les données par colonnnes plutôt que par ligne.
                     </li>
-                    <li><em>Projection push-down, predicate push-down</em> : Parquet fournit un indexe des au niveau des colonnnes pour réduire les
+                    <li><em>Projection push-down, predicate push-down</em> : Parquet fournit un indexe au niveau des colonnes pour réduire les
                         opérations I/O.
                     </li>
                     <li><em>Partitions</em> : Parquet divise les données en partitions pour en optimiser la lecture et les traitements.</li>
@@ -172,7 +172,7 @@
 
             <section>
                 <h3>Compression</h3>
-                <small><p><em>La compression</em>, en Parquet, est appliquée sur les pages de données (aprèès l'encodage) pour réduire
+                <small><p><em>La compression</em>, en Parquet, est appliquée sur les pages de données (après l'encodage) pour réduire
                     encore davantage le coût de stockage et accélérer les opérations I/O.
                     Chaque bloc d'une colonne d'un fichier Parquet peut utiliser une méthode de compression différente, indépendamment 
                     des autres.
@@ -213,8 +213,8 @@
                         style="font-weight: bold;"> de données géospatiales vectorielles
                 (points, lignes, polygones)</span> dans un format orienté colonnes, compressé et incluant de nombreuses métadonnées.</p>
                 <p>
-                    Il est déjà supporté par de nombreux outils (par exemple Sedona, GeoPandas, QGIS, DuckDB, Kepler GL, etc.)
-                    Vous pouvez cconsulter le site officiels de GeoParquet <a href="https://geoparquet.org/"></a> pour plus d'informations.
+                    Il est déjà supporté par de nombreux outils (par exemple Sedona, GeoPandas, QGIS, DuckDB, Kepler GL, etc).
+                    Vous pouvez consulter le site officiel de GeoParquet <a href="https://geoparquet.org/"></a> pour plus d'informations.
                 </p>
             </section>
 
